@@ -1,29 +1,45 @@
 import hashlib
+import sys
 
-name = input("Enter the file name with its extension: ")
-
-current_hash = []
-with open(name, 'r') as file:  # Open up the generating file
-    for line in file:  # Go line by line
-        rawLine = line.strip()  # Remove the terminating character from a line
-        sha_256 = hashlib.sha3_256()  # Get the hash ready
-        sha_256.update(rawLine.encode())  # Convert the line to bytes and put in hash function
-        current_hash.append(sha_256.hexdigest())  # Store hex value for later
-
-with open(name + " - Checksum.txt", 'r') as file:  # Open up the original checksum file
+def getHash(fileName):
     try:
-        original_length = sum(1 for _ in file)  # Get the line amount for the original
-        if original_length != len(current_hash):  # If the line amounts are unequal
-            raise Exception  # The file was changed
+        with open(fileName, 'rb') as file:
+            sha_256 = hashlib.sha256()  # Get the hash ready
+            for b_block in iter(lambda: file.read(4096),b""):  # Read in blocks of bytes
+                sha_256.update(b_block)
 
-        for index, line in enumerate(file):  # Go line by line
-            rawLine = line.strip()  # Remove the terminating character from a line
-            if rawLine != current_hash[index]:  # If lines don't match
-                raise Exception  # The file was changed
-        print("Clear: The checksum values match")
+            return sha_256.hexdigest()
+    except:
+        print("Warning: Target file not in same directory")
+        input("Press the enter key to exit the program")
+        sys.exit()
+
+def main():
+    name = input("Enter the file name with its extension: ")
+    name.strip()
+    current_hash = getHash(name)
+
+    name = name.split('.')
+    name.pop()
+    name = '.'.join(name)
+    try:
+        with open(name + " - Checksum.txt", "rt") as f:
+            original_hash = f.read()
+    except:
+        print("Warning: Corresponding Checksum.txt not in same directory")
+        input("Press the enter key to exit the program")
+        sys.exit()
+
+    try:
+        if current_hash != original_hash:
+            raise Exception
+        print("Clear: The checksums match")
     except:
         print("Warning: The checksum values don't match")
+    finally:
+        input("Press the enter key to exit the program")
 
+main()
 # Cases for mismatched checksum values
 # Case 1: Equals line amount
 # Case 2: Current > Original
