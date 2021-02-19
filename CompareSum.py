@@ -40,7 +40,3 @@ def main():
         input("Press the enter key to exit the program")
 
 main()
-# Cases for mismatched checksum values
-# Case 1: Equals line amount
-# Case 2: Current > Original
-# Case 3: Current < Original
