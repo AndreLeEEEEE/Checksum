@@ -1,6 +1,10 @@
 # Checksum
 This repository contains two programs, for generating the checksum of a file and another for checking the checksum of a file.
 
+Versions of python and installed modules:
+- python 3.7.8
+- Visual Studio 16.8.4
+
 Both programs utilize sha-256, Secure Hashing Algorithm, into other to read in the binary of files and convert it to a hex string.
 
 The Checksum program allows the user to enter in the name of a file and have its hashed value written into a similarly named
