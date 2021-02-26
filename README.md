@@ -3,7 +3,7 @@ This repository contains two programs, for generating the checksum of a file and
 
 Versions of python and installed modules:
 - python 3.7.8
-- Visual Studio 16.8.4
+- Visual Studio 16.8.6
 
 Both programs utilize sha-256, Secure Hashing Algorithm, into other to read in the binary of files and convert it to a hex string.
 
