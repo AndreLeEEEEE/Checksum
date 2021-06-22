@@ -21,3 +21,8 @@ Update 2/19/2021: I'm not sure if this program is gonna be useful since 7-Zip Fi
 contextual menu (when you right click a file). While this project uses one program to generate a sha256 hash value and 
 another for comparison, CRC SHA allows the user to look at the SHA256 hash value of any file instantaneously. The latter
 doesn't do comparisons, but that isn't hard to do manually when you already have the old hash value saved somewhere.
+
+Update 6/22/2021: Scratch.py was added because it contains the basis of a program that checks the HTML of a web page.
+It uses selenium to capture a portion (or all) of the page's HTML and generates a SHA256 checksum value from it. Dagan
+and Wynn have talked about a need to check the HTML layout of pages on Plex to ensure that other non-API automations can
+still operate. This py file is the start of that.
